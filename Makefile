@@ -12,6 +12,8 @@
 #   make <options> KERNEL=linux/arch/x86/boot/uImage <other vars> <target>
 #---------------------------------------------------------------------------
 
+# export PATH="/opt/arm-toolchains/gcc-linaro-7.3.1-2018.05-x86_64_arm-linux-gnueabi/bin/:${PATH}"
+
 # Main directories. Make them available to sub-Makefiles if needed
 
 export KERNEL_SOURCE_DIR       := $(PWD)/linux/src
@@ -43,15 +45,18 @@ PARALLELMFLAGS = '-j15'
 
 # KERNEL
 
-KERNEL_GIT = git://git.kernel.org/pub/scm/linux/kernel/git/arnd/playground.git
-KERNEL_COMMIT = y2038-4.8
+KERNEL_GIT = https://github.com/lmajewski/y2038_kernel.git
+#Current branch: y2038-kernel-07-02-2019
+KERNEL_COMMIT = 4ad44aba07b74fdba867d53b4d61bb1facd946fa
 KERNEL_DEVICE_TREE  = vexpress-v2p-ca15-tc1
 KERNEL_COMMAND_LINE = 'root=/dev/ram  rw quiet console=ttyAMA0'
 
 # GLIBC
 
-GLIBC_GIT = git://sourceware.org/git/glibc.git
-GLIBC_COMMIT = aaribaud/y2038
+#GLIBC_GIT = git://sourceware.org/git/glibc.git
+#GLIBC_COMMIT = aaribaud/y2038
+GLIBC_GIT = https://github.com/lmajewski/y2038_glibc.git
+GLIBC_COMMIT = Y2038-2.29-glibc-08-02-2019
 GLIBC_HOST = $(TARGET_ARCH)
 
 # BUSYBOX
