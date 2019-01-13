@@ -11,7 +11,7 @@
 
 .PHONY: all install clean
 
-CFLAGS += --sysroot=$(SYSROOT) -isystem =/usr/include -g -Wall -Wextra -Werror
+CFLAGS += --sysroot=$(SYSROOT) -isystem =/usr/include -g -Wall -Wextra
 LDCFLAGS += --sysroot=$(SYSROOT) -isystem =/usr/include -L=/lib -L=/usr/lib -g
 
 all: test_n2038 test_y2038
