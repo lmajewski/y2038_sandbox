@@ -91,6 +91,10 @@ clean-all: clean
 	$(MAKE) -C $(BUSYBOX_DIR) clean
 	$(MAKE) -C $(Y2038TESTS_DIR) clean
 
+clean-linux: clean
+	$(MAKE) -C $(KERNEL_SOURCE_DIR) O=$(KERNEL_BUILD_DIR_Y2038) clean
+	$(MAKE) -C $(KERNEL_SOURCE_DIR) O=$(KERNEL_BUILD_DIR_N2038) clean
+
 #---------------------------------------------------------------------------
 # KERNEL
 #---------------------------------------------------------------------------
