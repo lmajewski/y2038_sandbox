@@ -29,8 +29,7 @@ test_n2038: $(patsubst %.c,%.32.o,$(wildcard *.c))
 	@$(CC) $(CFLAGS) -c -o $@ -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64 $<
 	
 %.64.d: %.c
-	@$(CC) $(LDCFLAGS) -M -o $@ -D_TIME_BITS=64 $<
-	
+	@$(CC) $(LDCFLAGS) -M -o $@ -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64 $<
 %.32.o: %.c %.32.d
 	@echo "CC32  $<"
 	@$(CC) $(CFLAGS) -c -o $@ -D_FILE_OFFSET_BITS=64 $<
