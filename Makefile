@@ -39,6 +39,8 @@ export CC=$(CROSS_COMPILE)gcc
 export CXX=arm-linux-gnueabi-g++
 export LD=$(CROSS_COMPILE)ld
 
+PARALLELMFLAGS = '-j15'
+
 # KERNEL
 
 KERNEL_GIT = git://git.kernel.org/pub/scm/linux/kernel/git/arnd/playground.git
@@ -130,10 +132,10 @@ $(KERNEL_BUILD_DIR_N2038)/.config: configs/kernel-$(ARCH)-defconfig-n2038 | $(KE
 # How to build the image for the image
 
 $(KERNEL_IMAGE_Y2038): $(KERNEL_BUILD_DIR_Y2038)/.config
-	$(MAKE) -j -C $(KERNEL_SOURCE_DIR) O=$(KERNEL_BUILD_DIR_Y2038) zImage
+	$(MAKE) $(PARALLELMFLAGS) -C $(KERNEL_SOURCE_DIR) O=$(KERNEL_BUILD_DIR_Y2038) zImage
 
 $(KERNEL_IMAGE_N2038): $(KERNEL_BUILD_DIR_N2038)/.config
-	$(MAKE) -j -C $(KERNEL_SOURCE_DIR) O=$(KERNEL_BUILD_DIR_N2038) zImage
+	$(MAKE) $(PARALLELMFLAGS) -C $(KERNEL_SOURCE_DIR) O=$(KERNEL_BUILD_DIR_N2038) zImage
 
 # How to build the device tree for the image
 
@@ -192,7 +194,7 @@ $(GLIBC_BUILD_DIR)/Makefile: $(GLIBC_SOURCE_DIR)/configure  $(KERNEL_HDR_Y2038)
 
 # How to build the component
 $(GLIBC_LIBS): $(GLIBC_BUILD_DIR)/Makefile
-	$(MAKE) -C $(GLIBC_BUILD_DIR)
+	$(MAKE) ${PARALLELMFLAGS} -C $(GLIBC_BUILD_DIR)
 
 .PHONY: glibc-configure glibc glibc-install
 
