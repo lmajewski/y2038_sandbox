@@ -196,11 +196,14 @@ $(GLIBC_BUILD_DIR)/Makefile: $(GLIBC_SOURCE_DIR)/configure  $(KERNEL_HDR_Y2038)
 $(GLIBC_LIBS): $(GLIBC_BUILD_DIR)/Makefile
 	$(MAKE) ${PARALLELMFLAGS} -C $(GLIBC_BUILD_DIR)
 
-.PHONY: glibc-configure glibc glibc-install
+.PHONY: glibc-configure glibc glibc-install glibc-check
 
 glibc-configure: $(GLIBC_BUILD_DIR)/Makefile
 
 glibc: $(GLIBC_LIBS)
+
+glibc-check: glibc
+	$(MAKE) check ${PARALLELMFLAGS} -C $(GLIBC_BUILD_DIR)
 
 #---------------------------------------------------------------------------
 # BUSYBOX
